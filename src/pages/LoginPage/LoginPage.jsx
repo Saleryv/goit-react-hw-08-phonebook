@@ -11,9 +11,9 @@ import { logIn } from 'redux/user/userSlice';
 
 
 function LoginPage() {
-  const isLoading = useSelector(state => state.userData.isLoading);
-  const userData = useSelector(state => state.userData.userData);
-  const error = useSelector(state => state.userData.error);
+  const isLoading = useSelector(state => state.auth.isLoading);
+  const userData = useSelector(state => state.auth.userData);
+  const error = useSelector(state => state.auth.error);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -22,7 +22,7 @@ function LoginPage() {
 
   useEffect(() => {
     if (userData !== null) {
-      navigate('/contactsPage');
+      navigate('/contacts');
     }
   }, [userData, navigate]);
 

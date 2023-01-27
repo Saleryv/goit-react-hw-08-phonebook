@@ -7,9 +7,9 @@ import { registerUser } from 'redux/user/userSlice';
 function RegisterPage() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const isLoading = useSelector(state => state.userData.isLoading);
-    const error = useSelector(state => state.userData.error);
-    const userData = useSelector(state => state.userData.userData);
+    const isLoading = useSelector(state => state.auth.isLoading);
+    const error = useSelector(state => state.auth.error);
+    const userData = useSelector(state => state.auth.userData);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -29,7 +29,7 @@ function RegisterPage() {
 
   useEffect(() => {
     if (userData !== null) {
-      navigate('/contactsPage');
+      navigate('/contacts');
     }
   }, [userData, navigate]);
   return (

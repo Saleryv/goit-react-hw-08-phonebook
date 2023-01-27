@@ -3,8 +3,8 @@
 // import { ContactForm } from './ContactForm/ContactForm';
 
 import css from './App.module.css';
-import { useSelector } from 'react-redux';
-import { Suspense } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Suspense, useEffect } from 'react';
 import { NavLink, Route, Routes } from 'react-router-dom';
 
 import ContactsPage from '../pages/ContactsPage/ContactsPage';
@@ -12,6 +12,7 @@ import ContactsPage from '../pages/ContactsPage/ContactsPage';
 import RegisterPage from '../pages/RegisterPage/RegisterPage';
 import LoginPage from '../pages/LoginPage/LoginPage';
 import Loader from './Loader/Loader';
+import { authUserRequest, logOut } from 'redux/user/userSlice';
 
 
 // const HomePage = lazy(() => import('pages/HomePage/HomePage'));
@@ -20,78 +21,76 @@ import Loader from './Loader/Loader';
 
 
 export const App = () => {
-  // const isLoading = useSelector(state => state.contacts.isLoading)
-  // const dispatch = useDispatch();
-  const userData = useSelector(state => state.userData.userData);
+  const auth = useSelector(state => state.auth.userData);
+  const isUserAuthorization = auth !== null;
+  const dispatch = useDispatch();
 
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+
+    if (!token) return;
+
+    dispatch(authUserRequest());
+  }, [dispatch]);
+
+  const handleLogOut = () => {
+    dispatch(logOut());
+  };
   return (
-    
-    // <div className={css.app}>
-    //   <h1>Phonebook</h1>
-    //   <ContactForm />
-    //   <h2>Contacts</h2>
-    //   <Filter />
-    //   <ContactList/>
-    // <div>
-
     <>
-      <div className={css.app}>
-        <header>
-          <nav>
-            {/* <NavLink
-              to="/"
-              className={({ isActive }) =>
-                isActive ? css.active : css.navLink
-              }
-            >
-              Home
-            </NavLink> */}
-            {userData !== null ? (
+    <div>
+      <header className={css.header}>
+        <nav>
+          {isUserAuthorization ? (
+            <>
               <NavLink
+                to="/contacts"
                 className={({ isActive }) =>
                   isActive ? css.active : css.navLink
                 }
-                to="/contactsPage"
               >
                 Contacts
               </NavLink>
-            ) : null}
-
-            {userData !== null ? null : (
+              <button
+                type="button"
+                className={css.btn}
+                onClick={handleLogOut}
+              >
+                Log Out
+              </button>
+            </>
+          ) : (
+            <>
               <NavLink
-                to="/registerPage"
+                to="/register"
                 className={({ isActive }) =>
                   isActive ? css.active : css.navLink
                 }
               >
                 Register 
               </NavLink>
-            )}
-
-            {userData !== null ? null : (
               <NavLink
                 to="/loginPage"
                 className={({ isActive }) =>
                   isActive ? css.active : css.navLink
                 }
               >
-                Login  
+                Log in
               </NavLink>
-            )}
-          </nav>
-        </header>
-        <div>
-  <Suspense fallback={<Loader />}>
-      <Routes>
-        {/* <Route path='/' element={<HomePage />} /> */}
-        <Route path='/contactsPage' element={<ContactsPage />} />
-        <Route path='/registerPage' element={<RegisterPage />} />
-        <Route path='/loginPage' element={<LoginPage />} />
-        {/* <Route path='*' element={<HomePage />} /> */}
-      </Routes>
-    </Suspense>
+            </>
+          )}
+        </nav>
+      </header>
+      <div>
+        <Suspense fallback={<Loader />}>
+          <Routes>
+          <Route path='/contacts' element={<ContactsPage />} />
+          <Route path='/register' element={<RegisterPage />} />
+          <Route path='/loginPage' element={<LoginPage />} />
+          </Routes>
+        </Suspense>
+      </div>
     </div>
-    </div>
-    </>
-  );
+  </>
+);
 };

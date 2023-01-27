@@ -3,12 +3,13 @@ import css from '../ContactList/ContactList.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectFilterContacts } from 'redux/contacts/selectors';
 import { useEffect } from 'react';
-import { getContactsThunk } from 'redux/thunks/contactsThunk';
+import { getContactsRequest } from 'redux/contacts/contactsSlice';
+
 
 export const ContactList = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getContactsThunk());
+    dispatch(getContactsRequest());
   }, [dispatch]);
 
   // const contacts = useSelector(getContacts);

@@ -3,14 +3,15 @@ import css from './ContactForm.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 // import { addContact } from 'redux/contacts/contactsSlice';
 import { useEffect } from 'react';
-import { addContactsThunk, getContactsThunk } from 'redux/thunks/contactsThunk';
+import { addContactsRequest, getContactsRequest } from 'redux/contacts/contactsSlice';
+
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(state => state.contacts.contacts);
 
   useEffect(() => {
-    dispatch(getContactsThunk())
+    dispatch(getContactsRequest())
   }, [dispatch]);
 
   const [formData, setFormData] = useState({
@@ -40,7 +41,7 @@ export const ContactForm = () => {
       return;
     }
     const newContact = {...formData }
-    dispatch(addContactsThunk(newContact)); 
+    dispatch(addContactsRequest(newContact)); 
     reset();
   };
 

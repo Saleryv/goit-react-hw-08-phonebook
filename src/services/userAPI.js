@@ -23,11 +23,11 @@ $privateHost.interceptors.request.use(authInterceptor);
 
 export const UserAPI = {
   async register(formData) {
-    const { data } = await $publicHost.post(`users/signup`, { ...formData });
+    const { data } = await $publicHost.post(`users/signup`, formData );
     return await data;
   },
   async login(formData) {
-    const { data } = await $publicHost.post(`users/login`, { ...formData });
+    const { data } = await $publicHost.post(`users/login`, formData );
     return await data;
   },
   async getUserDetailsRequest() {
@@ -45,11 +45,11 @@ export const ContactsAPI = {
     const { data } = await $privateHost.get(`/contacts`);
     return await data;
   },
-  async addContactRequest(contactData) {
+  async addContactsRequest(contactData) {
     const { data } = await $privateHost.post(`/contacts`, { ...contactData });
     return await data;
   },
-  async deleteContactRequest(contactId) {
+  async deleteContactsRequest(contactId) {
     const { data } = await $privateHost.delete(`/contacts/${contactId}`);
     return await data;
   },
