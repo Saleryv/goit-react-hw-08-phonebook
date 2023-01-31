@@ -1,23 +1,18 @@
-// import { Filter } from './Filter/Filter';
-// import { ContactList } from './ContactList/ContactList';
-// import { ContactForm } from './ContactForm/ContactForm';
-
 import css from './App.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { Suspense, useEffect } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { NavLink, Route, Routes } from 'react-router-dom';
 
-import ContactsPage from '../pages/ContactsPage/ContactsPage';
-// import HomePage from '../pages/HomePage/HomePage';
-import RegisterPage from '../pages/RegisterPage/RegisterPage';
-import LoginPage from '../pages/LoginPage/LoginPage';
+// import ContactsPage from '../pages/ContactsPage/ContactsPage';
+// import RegisterPage from '../pages/RegisterPage/RegisterPage';
+// import LoginPage from '../pages/LoginPage/LoginPage';
 import Loader from './Loader/Loader';
 import { authUserRequest, logOut } from 'redux/user/userSlice';
 
 
-// const HomePage = lazy(() => import('pages/HomePage/HomePage'));
-// const RegisterPage = lazy(() => import('pages/RegisterPage/RegisterPage'));
-// const LoginPage = lazy(() => import('pages/LoginPage/LoginPage'));
+const RegisterPage = lazy(() => import('pages/RegisterPage/RegisterPage'));
+const LoginPage = lazy(() => import('pages/LoginPage/LoginPage'));
+const ContactsPage = lazy(() => import('pages/ContactsPage/ContactsPage'));
 
 
 export const App = () => {

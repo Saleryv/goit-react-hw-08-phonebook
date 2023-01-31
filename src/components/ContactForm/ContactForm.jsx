@@ -69,6 +69,7 @@ export const ContactForm = () => {
             required
           />
         </label>
+       <span> </span>
         <label className={css.label}>
           Number
           <input
