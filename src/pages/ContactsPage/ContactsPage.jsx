@@ -12,16 +12,13 @@ import WithAuthRedirect from 'hoc/WithAuthRedirect';
 
 function ContactsPage() {
   const dispatch = useDispatch();
+
   const contacts = useSelector(state => state.contacts.contacts);
   const isLoading = useSelector(state => state.contacts.isLoading);
   const error = useSelector(state => state.contacts.error);
   const userData = useSelector(state => state.auth.userData);
   const filter = useSelector(state => state.contacts.filter);
 
-  // const [name, setName] = useState('');
-  // const [number, setNumber] = useState('');
-
- 
   
   const filteredContacts = contacts.filter(contact =>
     contact.name.toLowerCase().trim().includes(filter.toLowerCase().trim())
@@ -32,22 +29,7 @@ function ContactsPage() {
     dispatch(getContactsRequest());
   }, [userData, dispatch]);
 
-  // const handleSubmit = event => {
-  //   event.preventDefault();
 
-  //   const formData = {
-  //     name,
-  //     number,
-  //   };
-
-  //   dispatch(addContactsRequest(formData));
-  //   setName('');
-  //   setNumber('');
-  // };
-
-  // const handleDeleteContact =  contactId  => {
-  //   dispatch(deleteContactsRequest(contactId));
-  // };
   return (
     <>
       <ul>

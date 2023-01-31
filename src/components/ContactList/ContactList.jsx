@@ -12,8 +12,6 @@ export const ContactList = () => {
     dispatch(getContactsRequest());
   }, [dispatch]);
 
-  // const contacts = useSelector(getContacts);
-  // const filter = useSelector(getFilter);
   const filterContact = useSelector(selectFilterContacts)
   
 return (

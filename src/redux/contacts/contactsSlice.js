@@ -6,8 +6,6 @@ export const getContactsRequest = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const response = await ContactsAPI.getContactsRequest();
-
-      // console.log('response', response);
       return response;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -20,8 +18,6 @@ export const addContactsRequest = createAsyncThunk(
   async (contactData, thunkAPI) => {
     try {
       const response = await ContactsAPI.addContactsRequest(contactData);
-
-      // console.log('response', response);
       return response;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

@@ -3,12 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { lazy, Suspense, useEffect } from 'react';
 import { NavLink, Route, Routes } from 'react-router-dom';
 
-// import ContactsPage from '../pages/ContactsPage/ContactsPage';
-// import RegisterPage from '../pages/RegisterPage/RegisterPage';
-// import LoginPage from '../pages/LoginPage/LoginPage';
 import Loader from './Loader/Loader';
 import { authUserRequest, logOut } from 'redux/user/userSlice';
-
 
 const RegisterPage = lazy(() => import('pages/RegisterPage/RegisterPage'));
 const LoginPage = lazy(() => import('pages/LoginPage/LoginPage'));
@@ -22,15 +18,14 @@ export const App = () => {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-
     if (!token) return;
-
     dispatch(authUserRequest());
   }, [dispatch]);
 
   const handleLogOut = () => {
     dispatch(logOut());
   };
+  
   return (
     <>
     <div>

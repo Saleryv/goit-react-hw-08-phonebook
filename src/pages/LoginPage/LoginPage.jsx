@@ -6,9 +6,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { logIn } from 'redux/user/userSlice';
 
-// import { loginUserRequest } from 'redux/user/userSlice';
-
-
 
 function LoginPage() {
   const isLoading = useSelector(state => state.auth.isLoading);
